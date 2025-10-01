@@ -65,7 +65,7 @@ const Navbar = () => {
               />
             </svg>
           </span>
-          <span className="font-bold">DevUI</span>
+          <span className="font-bold">PayCart</span>
         </div>
         <div className="hidden lg:block">
           <ul className="ml-12 inline-flex space-x-8">
@@ -144,7 +144,7 @@ const Navbar = () => {
                         />
                       </svg>
                     </span>
-                    <span className="font-bold">DevUI</span>
+                    <span className="font-bold">PayCart</span>
                   </div>
                   <div className="-mr-2">
                     <button

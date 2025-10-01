@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, Navigate } from "react-router-dom";
 import ProductDisplay from './screens/ProductDisplay';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
@@ -7,7 +7,6 @@ import ProductDetails from './screens/ProductDetails';
 import ShoppingCart from './screens/ShoppingCart';
 import { toast, ToastContainer } from 'react-toastify';
 import "react-toastify/dist/ReactToastify.css";
-import Main from './screens/Main';
 import { Login } from './screens/login';
 import { SignUp } from './screens/SignUp';
 import ProtectedRoute from './screens/protected_route/ProtectedRoute';
@@ -40,14 +39,18 @@ function App() {
   useEffect(() => {
     onAuthStateChanged(auth, (currentUser) => {
       setUser(currentUser);
-      dispatch(userState(currentUser ? true : false))
-      dispatch(userState({ isLoggedIn : currentUser ? true : false, data : currentUser.providerData}))
+      if (currentUser) {
+        dispatch(userState({ isLoggedIn: true, data: currentUser.providerData}))
+      } else {
+        dispatch(userState({ isLoggedIn: false, data: []}))
+      }
     })
   }, [])
 
   return (
     <>
       <Routes>
+        <Route path="/" element={<Navigate to="/page/1" replace />} />
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<SignUp />} />
         <Route
@@ -119,7 +122,7 @@ function App() {
             </>
           }
         />
-        {/* <Route path="/*" element={<Navigate to="/page/1" replace />} /> */}
+        <Route path="/*" element={<Navigate to="/page/1" replace />} />
       </Routes>
     </>
   )
